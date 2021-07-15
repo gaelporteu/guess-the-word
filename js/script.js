@@ -24,5 +24,6 @@ hideLetter(word)
 guessButton.addEventListener("click" , e => {
     e.preventDefault();
     const myLetter = guessLetter.value;
-    console.log(myLetter)
+    console.log(myLetter);
+    guessLetter.value = ""; // this clears the box after clicking
 })
