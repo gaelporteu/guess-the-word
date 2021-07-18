@@ -12,6 +12,8 @@ const hiddenButton = document.querySelector(".play-again");
 
 const word = "magnolia";
 
+const lettersNotInWord = [];
+
 const hideLetter = () => {
     // console.log(word);
     for (let letter of word) {
@@ -26,4 +28,30 @@ guessButton.addEventListener("click" , e => {
     const myLetter = guessLetter.value;
     console.log(myLetter);
     guessLetter.value = ""; // this clears the box after clicking
+    // console.log(checkInput(myLetter));
+    checkInput(myLetter);
 })
+
+const checkInput = myLetter => {
+    const acceptedLetter = /[a-zA-Z]/
+    if (myLetter === "") {
+        return "Please enter a single letter";
+    } else if (myLetter.length > 1) {
+        return "Please enter only one letter";
+        // use of the bang operator below "!"
+    } else if (!myLetter.match(acceptedLetter)) {
+        return "Please enter a letter A-Z";
+    } else {
+        makeGuess(myLetter);
+    }
+}
+
+const makeGuess = letter => {
+    const letterUpperCase = letter.toUpperCase();
+    // check to see if letter already in array using includes
+    if (letterUpperCase !== lettersNotInWord.includes(letterUpperCase)) {
+        lettersNotInWord.push(letterUpperCase);
+    }
+    console.log(lettersNotInWord)
+    return lettersNotInWord
+}
