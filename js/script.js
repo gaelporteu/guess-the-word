@@ -49,9 +49,12 @@ const checkInput = myLetter => {
 const makeGuess = letter => {
     const letterUpperCase = letter.toUpperCase();
     // check to see if letter already in array using includes
-    if (letterUpperCase !== lettersNotInWord.includes(letterUpperCase)) {
+    if (lettersNotInWord.includes(letterUpperCase)) {
+        console.log("You've already guessed that letter silly!")
+        return "You've already guessed that letter silly!"
+    } else {
         lettersNotInWord.push(letterUpperCase);
+        console.log(lettersNotInWord)
     }
-    console.log(lettersNotInWord)
     return lettersNotInWord
 }
