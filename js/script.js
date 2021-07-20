@@ -77,13 +77,23 @@ const updateWordInProgress = () => {
     const wordArray = wordUpper.split("");
     console.log(wordArray)
     const lettersInWord = [];
-    for (let i = 0; i < wordArray.length; i++) {
-        for (let j = 0; j < guessedLetters.length; j++) {
-            if (wordArray[i] === guessedLetters[j]) {
-                lettersInWord.push(wordArray[i]);
-            }
+
+    for (let letter of wordArray) {
+        if (guessedLetters.includes(letter)) {
+            lettersInWord.push(letter)
+        } else {
+            lettersInWord.push("●")
         }
     }
-    return lettersInWord;
+    wordInProgress.innerText = lettersInWord.join("")
+
+    // for (let i = 0; i < wordArray.length; i++) {
+    //     for (let j = 0; j < guessedLetters.length; j++) {
+    //         if (wordArray[i] === guessedLetters[j]) {
+    //             lettersInWord.push(wordArray[i]);
+    //         }
+    //     }
+    // }
+    // return lettersInWord;
 }
 
