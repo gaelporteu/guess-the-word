@@ -27,7 +27,7 @@ hideLetter(word)
 guessButton.addEventListener("click" , e => {
     e.preventDefault();
     const myLetter = guessLetter.value;
-    console.log(myLetter);
+    // console.log(myLetter);
     guessLetter.value = ""; // this clears the box after clicking
     // console.log(checkInput(myLetter));
     checkInput(myLetter);
@@ -57,6 +57,7 @@ const makeGuess = letter => {
         guessedLetters.push(letterUpperCase);
         showGuessedLetters(guessedLetters);
         updateWordInProgress(guessedLetters);
+        checkWinner();
     }
 }
 
@@ -75,25 +76,26 @@ const showGuessedLetters = () => {
 const updateWordInProgress = () => {
     const wordUpper = word.toUpperCase();
     const wordArray = wordUpper.split("");
-    console.log(wordArray)
+    // console.log(wordArray)
     const lettersInWord = [];
 
     for (let letter of wordArray) {
         if (guessedLetters.includes(letter)) {
-            lettersInWord.push(letter)
+            lettersInWord.push(letter);
         } else {
-            lettersInWord.push("●")
+            lettersInWord.push("●");
         }
     }
-    wordInProgress.innerText = lettersInWord.join("")
-
-    // for (let i = 0; i < wordArray.length; i++) {
-    //     for (let j = 0; j < guessedLetters.length; j++) {
-    //         if (wordArray[i] === guessedLetters[j]) {
-    //             lettersInWord.push(wordArray[i]);
-    //         }
-    //     }
-    // }
-    // return lettersInWord;
+    wordInProgress.innerText = lettersInWord.join("");
+    
 }
 
+const checkWinner = () => {
+    
+    if (word.toUpperCase() == wordInProgress.innerText) {
+        playerMessage.classList.add("win");
+        playerMessage.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+    } else {
+        console.log("no winner");
+    }
+} 
