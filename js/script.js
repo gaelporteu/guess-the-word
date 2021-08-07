@@ -1,101 +1,25 @@
-const lettersGuessed = document.querySelector(".guessed-letters");
+// unordered list where the player’s guessed letters will appear
+const playersGuessedLetters = document.querySelector(".guessed-letters");
+// button with the text “Guess!” in it
 const guessButton = document.querySelector(".guess");
-const guessLetter = document.querySelector(".letter");
-const wordInProgress = document.querySelector(".word-in-progress");
-const remainingGuesses = document.querySelector(".remaining");
-const spanOfGuesses = document.querySelector(".remaining span");
+// text input where the player will guess a letter
+const playerInput = document.querySelector(".guess-form input");
+// empty paragraph where the word in progress will appear
+const buildWordInProgress = document.querySelector(".word-in-progress");
+// paragraph where the remaining guesses will display
+const playersRemainingGuesses = document.querySelector(".remaining");
+// span inside the paragraph where the remaining guesses will display
+const playersRemainingGuessesSpan = document.querySelector(".remaining span");
+// empty paragraph where messages will appear when the player guesses a letter
 const playerMessage = document.querySelector(".message");
-const hiddenButton = document.querySelector(".play-again");
+// hidden button that will appear prompting the player to play again
+const hiddenPlayAgainButton = document.querySelector(".play-again.hide");
+// Magnolia is your starting word to test out the game
+const word = "Magnolia";
 
-// console.log(guessButton); // test to see if working
-// console.log(spanOfGuesses); // test to see if working
-
-const word = "magnolia";
-
-const guessedLetters = [];
-
-const hideLetter = () => {
-    // console.log(word);
-    for (let letter of word) {
-       wordInProgress.innerText += "●";
-    }
-
-}
-
-hideLetter(word)
-
-guessButton.addEventListener("click" , e => {
-    e.preventDefault();
-    const myLetter = guessLetter.value;
-    // console.log(myLetter);
-    guessLetter.value = ""; // this clears the box after clicking
-    // console.log(checkInput(myLetter));
-    checkInput(myLetter);
-})
-
-const checkInput = myLetter => {
-    const acceptedLetter = /[a-zA-Z]/
-    if (myLetter === "") {
-        return "Please enter a single letter";
-    } else if (myLetter.length > 1) {
-        return "Please enter only one letter";
-        // use of the bang operator below "!"
-    } else if (!myLetter.match(acceptedLetter)) {
-        return "Please enter a letter A-Z";
-    } else {
-        makeGuess(myLetter);
-    }
-}
-
-const makeGuess = letter => {
-    const letterUpperCase = letter.toUpperCase();
-    // check to see if letter already in array using includes
-    if (guessedLetters.includes(letterUpperCase)) {
-        console.log("You've already guessed that letter silly!")
-        return "You've already guessed that letter silly!"
-    } else {
-        guessedLetters.push(letterUpperCase);
-        showGuessedLetters(guessedLetters);
-        updateWordInProgress(guessedLetters);
-        checkWinner();
-    }
-}
-
-const showGuessedLetters = () => {
-    lettersGuessed.innerHTML = "";
-    // console.log(guessedLetters);
-
-    // iterate over the guessedLetters array to output the li items
-    for (let letter of guessedLetters) {
-        const listLetters = document.createElement("li");
-        listLetters.innerHTML = letter;
-        lettersGuessed.append(listLetters);
-    }
-}
-
-const updateWordInProgress = () => {
-    const wordUpper = word.toUpperCase();
-    const wordArray = wordUpper.split("");
-    // console.log(wordArray)
-    const lettersInWord = [];
-
-    for (let letter of wordArray) {
-        if (guessedLetters.includes(letter)) {
-            lettersInWord.push(letter);
-        } else {
-            lettersInWord.push("●");
-        }
-    }
-    wordInProgress.innerText = lettersInWord.join("");
+// circle symbols (●) to represent each letter in the word
+const updateWordInProgress = (word) => {
     
 }
 
-const checkWinner = () => {
-    
-    if (word.toUpperCase() == wordInProgress.innerText) {
-        playerMessage.classList.add("win");
-        playerMessage.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
-    } else {
-        console.log("no winner");
-    }
-} 
+
