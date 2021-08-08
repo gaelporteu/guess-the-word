@@ -5,7 +5,7 @@ const guessButton = document.querySelector(".guess");
 // text input where the player will guess a letter
 const playerInput = document.querySelector(".guess-form input");
 // empty paragraph where the word in progress will appear
-const buildWordInProgress = document.querySelector(".word-in-progress");
+const wordInProgress = document.querySelector(".word-in-progress");
 // paragraph where the remaining guesses will display
 const playersRemainingGuesses = document.querySelector(".remaining");
 // span inside the paragraph where the remaining guesses will display
@@ -19,7 +19,13 @@ const word = "Magnolia";
 
 // circle symbols (●) to represent each letter in the word
 const updateWordInProgress = (word) => {
-    
+    lettersInWord = [];
+    for (const letter of word) {
+        console.log(letter)
+        lettersInWord.push("●")
+    }
+    wordInProgress.innerHTML = lettersInWord.join("")
 }
+updateWordInProgress(word)
 
 
