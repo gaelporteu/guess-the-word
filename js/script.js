@@ -71,15 +71,23 @@ const checkIsInputLetter = inputValue => {
 
 // function that accepts a letter as a parameter
 const makeGuess = letter => {
-    // converts letter to uppercase
-    const letterUpperCase = letter.toUpperCase();
-    // if guessedLetters array contains letter do something
-    if (guessedLetters.includes(letterUpperCase)) {
-      // return the message to player
-      return playerMessage.innerHTML = `You've already guessed the ${letterUpperCase}, please try again.`;
-    } else {
-      // else add letter to the array
-      guessedLetters.push(letterUpperCase);
-    }
-    console.log(guessedLetters);
+  // converts letter to uppercase
+  const letterUpperCase = letter.toUpperCase();
+  // if guessedLetters array contains letter do something
+  if (guessedLetters.includes(letterUpperCase)) {
+    // return the message to player
+    return playerMessage.innerHTML = `You've already guessed the ${letterUpperCase}, please try again.`;
+  } else {
+    // else add letter to the array
+    guessedLetters.push(letterUpperCase);
   }
+  console.log(guessedLetters);
+}
+
+const updatePageWithPlayerGuesses = () => {
+  playersGuessedLetters.innerHTML = "";
+  for (const letter of guessedLetters) {
+    playersGuessedLetters.
+  }
+}
+
