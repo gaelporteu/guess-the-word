@@ -33,7 +33,7 @@ const updateWordInProgress = (word) => {
 }
 updateWordInProgress(word);
 
-// event listener for when a player clicks the Guess button
+// event listener/handler for when a player clicks the Guess button
 guessButton.addEventListener("click", e => {
   // prevent the default behavior of clicking a button in a form
   e.preventDefault();
@@ -45,29 +45,39 @@ guessButton.addEventListener("click", e => {
   // empty the message element
   playerMessage.innerHTML = "";
   // call checkIsInputLetter using inputValue as argument
-  checkIsInputLetter(inputValue);
+  const checkInput = checkIsInputLetter(inputValue);
+  makeGuess(checkInput);
 });
 
 // function that accepts the input value as a parameter
-const checkIsInputLetter = (inputValue) => {
+const checkIsInputLetter = inputValue => {
   // regular expression to ensure the player inputs a letter 
   const acceptedLetter = /[a-zA-Z]/;
   
   // check if the input is empty
   if (inputValue === "") {
-    console.log("Please enter a letter");
-    return "Please enter a letter";
+    return playerMessage.innerHTML = "Please enter a letter";
+  // check if the input is more than 1 letter
   } else if (inputValue.length > 1) {
-    console.log("You can only enter one letter");
-    return "You can only enter one letter";
+    return playerMessage.innerHTML = "You can only enter one letter";
+  // check if the input is a letter 
   } else if (!inputValue.match(acceptedLetter)) {
-    console.log("You can only enter alpha character");
-    return "You can only enter alpha character";
+    return playerMessage.innerHTML = "You can only enter an alpabetical character from A-Z";
   }
   return inputValue;
 }
 
+// function that accepts a letter as a parameter
 const makeGuess = letter => {
-    // const letterUpperCase = letter.toUpperCase();
-    console.log(letter);
+    // converts letter to uppercase
+    const letterUpperCase = letter.toUpperCase();
+    // if guessedLetters array contains letter do something
+    if (guessedLetters.includes(letterUpperCase)) {
+      // return the message to player
+      return playerMessage.innerHTML = `You've already guessed the ${letterUpperCase}, please try again.`;
+    } else {
+      // else add letter to the array
+      guessedLetters.push(letterUpperCase);
+    }
+    console.log(guessedLetters);
   }
