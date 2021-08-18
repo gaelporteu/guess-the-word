@@ -106,7 +106,7 @@ const updatePageWithPlayerGuesses = () => {
 // function will replace the circle symbols with the correct letters guessed
 const updateWordInProgress = () => {
   // convert word to uppercase
-  const wordUpper = word.toLocaleUpperCase();
+  const wordUpper = word.toUpperCase();
   const wordArray = wordUpper.split("")
   console.log(wordArray);
   const revealWord = [];
