@@ -1,5 +1,5 @@
 // unordered list where the player’s guessed letters will appear
-const playersGuessedLetters = document.querySelector(".guessed-letters");
+const playerGuessedLetters = document.querySelector(".guessed-letters");
 // button with the text “Guess!” in it
 const guessButton = document.querySelector(".guess");
 // text input where the player will guess a letter
@@ -20,7 +20,7 @@ const word = "Magnolia";
 const guessedLetters = [];
 
 // circle symbols (●) to represent each letter in the word
-const updateWordInProgress = (word) => {
+const hideWord = (word) => {
   // empty arry to place each letter into
   lettersInWord = [];
   for (const letter of word) {
@@ -31,7 +31,7 @@ const updateWordInProgress = (word) => {
   // output the string of dots to the html element
   wordInProgress.innerHTML = lettersInWord.join("")
 }
-updateWordInProgress(word);
+hideWord(word);
 
 // event listener/handler for when a player clicks the Guess button
 guessButton.addEventListener("click", e => {
@@ -45,9 +45,9 @@ guessButton.addEventListener("click", e => {
   // empty the message element
   playerMessage.innerHTML = "";
   // call checkIsInputLetter using inputValue as argument
-  const checkInput = checkIsInputLetter(inputValue);
+  checkIsInputLetter(inputValue);
   // call the makeGuess function with the argument checkInput
-  makeGuess(checkInput);
+  makeGuess(inputValue);
 });
 
 // function that accepts the input value as a parameter
@@ -64,9 +64,10 @@ const checkIsInputLetter = inputValue => {
   // check if the input is a letter 
   } else if (!inputValue.match(acceptedLetter)) {
     return playerMessage.innerHTML = "You can only enter an alpabetical character from A-Z.";
+  } else {
+    // return the value of the function so that it is accessible to the makeGuess function
+    return inputValue;
   }
-  // return the value of the function so that it is accessible to the makeGuess function
-  return inputValue;
 }
 
 // function that accepts a letter as a parameter
@@ -82,12 +83,41 @@ const makeGuess = letter => {
     guessedLetters.push(letterUpperCase);
   }
   console.log(guessedLetters);
+  updateWordInProgress()
+  // call the update letters guess function
+  updatePageWithPlayerGuesses();
 }
 
+// this function will show the letters that have been guessed on screen
 const updatePageWithPlayerGuesses = () => {
-  playersGuessedLetters.innerHTML = "";
+  // this will empty what is contained between the "ul" element
+  playerGuessedLetters.innerHTML = "";
+  // this will add each letter from the guessedLetters array to the screen
   for (const letter of guessedLetters) {
-    playersGuessedLetters.
+    // this creates an "li" element for each letter in the guessedLetters array
+    const listGuessedLetters = document.createElement("li");
+    // this puts the letter into the "li" element
+    listGuessedLetters.innerHTML = letter;
+    // this adds the "li" element (with the letter) to the "ul" element
+    playerGuessedLetters.append(listGuessedLetters);
   }
 }
+
+// function will replace the circle symbols with the correct letters guessed
+const updateWordInProgress = () => {
+  // convert word to uppercase
+  const wordUpper = word.toLocaleUpperCase();
+  const wordArray = wordUpper.split("")
+  console.log(wordArray);
+  const revealWord = [];
+  for (const letter of wordArray) {
+    if (guessedLetters.includes(letter)) {
+      revealWord.push(letter);
+    } else {
+      revealWord.push("●")
+    }
+  }
+  wordInProgress.innerHTML = revealWord.join("");
+}
+
 
