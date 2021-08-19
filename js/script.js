@@ -47,14 +47,14 @@ guessButton.addEventListener("click", e => {
   // call checkIsInputLetter using inputValue as argument
   checkIsInputLetter(inputValue);
   // call the makeGuess function with the argument checkInput
-  makeGuess(inputValue);
+  makeGuess(returnLetter);
 });
 
 // function that accepts the input value as a parameter
 const checkIsInputLetter = inputValue => {
   // regular expression to ensure the player inputs a letter 
   const acceptedLetter = /[a-zA-Z]/;
-  
+  const returnLetter = inputValue;
   // check if the input is empty
   if (inputValue === "") {
     return playerMessage.innerHTML = "Please enter a letter.";
@@ -63,17 +63,17 @@ const checkIsInputLetter = inputValue => {
     return playerMessage.innerHTML = "You can only enter one letter.";
   // check if the input is a letter 
   } else if (!inputValue.match(acceptedLetter)) {
-    return playerMessage.innerHTML = "You can only enter an alpabetical character from A-Z.";
+    return playerMessage.innerHTML = "You can only enter an alphabetical character from A-Z.";
   } else {
     // return the value of the function so that it is accessible to the makeGuess function
-    return inputValue;
+    return returnLetter;
   }
 }
 
 // function that accepts a letter as a parameter
-const makeGuess = myLetter => {
+const makeGuess = letter => {
   // converts letter to uppercase
-  const letterUpperCase = myLetter.toUpperCase();
+  const letterUpperCase = letter.toUpperCase();
   // if guessedLetters array contains letter do something
   if (guessedLetters.includes(letterUpperCase)) {
     // return the message to player
