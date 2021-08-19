@@ -46,8 +46,6 @@ guessButton.addEventListener("click", e => {
   playerMessage.innerHTML = "";
   // call checkIsInputLetter using inputValue as argument
   checkIsInputLetter(inputValue);
-  // call the makeGuess function with the argument checkInput
-  makeGuess(inputValue);
 });
 
 // function that accepts the input value as a parameter
@@ -65,7 +63,8 @@ const checkIsInputLetter = inputValue => {
     return playerMessage.innerHTML = "You can only enter an alphabetical character from A-Z.";
   } else {
     // return the value of the function so that it is accessible to the makeGuess function
-    return inputValue;
+  // call the makeGuess function with the argument checkInput
+  makeGuess(inputValue);
   }
 }
 
