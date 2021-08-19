@@ -71,9 +71,9 @@ const checkIsInputLetter = inputValue => {
 }
 
 // function that accepts a letter as a parameter
-const makeGuess = letter => {
+const makeGuess = myLetter => {
   // converts letter to uppercase
-  const letterUpperCase = letter.toUpperCase();
+  const letterUpperCase = myLetter.toUpperCase();
   // if guessedLetters array contains letter do something
   if (guessedLetters.includes(letterUpperCase)) {
     // return the message to player
