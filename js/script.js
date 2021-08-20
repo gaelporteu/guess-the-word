@@ -21,8 +21,8 @@ const guessedLetters = [];
 
 // circle symbols (●) to represent each letter in the word
 const hideWord = (word) => {
-  // empty arry to place each letter into
-  lettersInWord = [];
+  // empty array to place each letter into
+  const lettersInWord = [];
   for (const letter of word) {
     console.log(letter)
     // push each letter into the array
@@ -107,6 +107,7 @@ const updateWordInProgress = () => {
   const wordUpper = word.toUpperCase();
   const wordArray = wordUpper.split("")
   console.log(wordArray);
+  // replaces the "●" with letters in the word
   const revealWord = [];
   for (const letter of wordArray) {
     if (guessedLetters.includes(letter)) {
@@ -116,6 +117,15 @@ const updateWordInProgress = () => {
     }
   }
   wordInProgress.innerHTML = revealWord.join("");
+  checkIfPlayerWon(revealWord);
 }
 
-
+// Function to Check If the Player Won
+const checkIfPlayerWon = revealWord => {
+  const wordArray = word.toUpperCase().split("")
+  console.log(revealWord);
+  if (revealWord.every((letter, index) => letter === wordArray[index])) {
+    playerMessage.classList.add("win");
+    playerMessage.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+  }
+}
