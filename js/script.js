@@ -18,6 +18,8 @@ const hiddenPlayAgainButton = document.querySelector(".play-again.hide");
 const word = "Magnolia";
 // array will contain all the letters the player guesses
 const guessedLetters = [];
+// Declare a Global Variable for the Number of Guesses
+const remainingGuesses = 8;
 
 // circle symbols (●) to represent each letter in the word
 const hideWord = (word) => {
@@ -118,6 +120,12 @@ const updateWordInProgress = () => {
   }
   wordInProgress.innerHTML = revealWord.join("");
   checkIfPlayerWon(revealWord);
+}
+
+// function to count guesses remaining
+const countGuessesRemaining = guess => {
+  const upperCaseWord = word.toUpperCase();
+  if (upperCaseWord.contains())
 }
 
 // Function to Check If the Player Won
