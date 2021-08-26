@@ -13,7 +13,9 @@ const playersRemainingGuessesSpan = document.querySelector(".remaining span");
 // empty paragraph where messages will appear when the player guesses a letter
 const playerMessage = document.querySelector(".message");
 // hidden button that will appear prompting the player to play again
-const hiddenPlayAgainButton = document.querySelector(".play-again.hide");
+const hiddenPlayAgainButton = document.querySelector(".play-again");
+// form label that says "Type one letter"
+const label = document.querySelector("label")
 
 // Magnolia is your starting word to test out the game
 let word = "Magnolia";
@@ -159,6 +161,7 @@ const countGuessesRemaining = guess => {
   }
 
   if (remainingGuesses < 1) {
+    startOver();
     return playerMessage.innerHTML = `You have lost the word was ${word}.`
   }
 }
@@ -169,6 +172,34 @@ const checkIfPlayerWon = revealWord => {
   console.log(revealWord);
   if (revealWord.every((letter, index) => letter === wordArray[index])) {
     playerMessage.classList.add("win");
+    startOver();
     playerMessage.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+    wordArray.length = 0;
   }
+}
+
+const startOver = () => {
+  guessButton.classList.toggle("hide");
+  playerGuessedLetters.classList.toggle("hide");
+  playersRemainingGuesses.classList.toggle("hide");
+  playerInput.classList.toggle("hide");
+  label.classList.toggle("hide");
+  hiddenPlayAgainButton.classList.toggle("hide");
+
+  hiddenPlayAgainButton.addEventListener("click", e => {
+    // location.reload();
+    playerMessage.classList.toggle("win");
+    playerMessage.innerHTML = "";
+    playerGuessedLetters.classList.toggle("hide");
+    playersRemainingGuesses.classList.toggle("hide");
+    playerInput.classList.toggle("hide");
+    label.classList.toggle("hide");
+    guessButton.classList.toggle("hide");
+    playerGuessedLetters.innerHTML = "";
+    remainingGuesses = 8;
+    guessedLetters.length = 0;
+    playersRemainingGuessesSpan.innerHTML = `${remainingGuesses} guess(es)`;
+    getWords();
+    hiddenPlayAgainButton.classList.toggle("hide");
+  })
 }
