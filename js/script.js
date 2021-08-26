@@ -39,7 +39,7 @@ const getWords = async () => {
   
   
   word = randomWord.trim();
-  console.log(word);
+  // console.log(word);
   hideWord(word)
 }; 
 
@@ -109,7 +109,7 @@ const makeGuess = letter => {
     // else add letter to the array
     guessedLetters.push(letterUpperCase);
   }
-  console.log(guessedLetters);
+  // console.log(guessedLetters);
   updateWordInProgress()
   // call the update letters guess function
   updatePageWithPlayerGuesses();
@@ -135,7 +135,7 @@ const updateWordInProgress = () => {
   // convert word to uppercase
   const wordUpper = word.toUpperCase();
   const wordArray = wordUpper.split("")
-  console.log(wordArray);
+  // console.log(wordArray);
   // replaces the "●" with letters in the word
   const revealWord = [];
   for (const letter of wordArray) {
@@ -169,7 +169,7 @@ const countGuessesRemaining = guess => {
 // Function to Check If the Player Won
 const checkIfPlayerWon = revealWord => {
   const wordArray = word.toUpperCase().split("")
-  console.log(revealWord);
+  // console.log(revealWord);
   if (revealWord.every((letter, index) => letter === wordArray[index])) {
     playerMessage.classList.add("win");
     startOver();
@@ -185,21 +185,21 @@ const startOver = () => {
   playerInput.classList.toggle("hide");
   label.classList.toggle("hide");
   hiddenPlayAgainButton.classList.toggle("hide");
-
-  hiddenPlayAgainButton.addEventListener("click", e => {
-    // location.reload();
-    playerMessage.classList.toggle("win");
-    playerMessage.innerHTML = "";
-    playerGuessedLetters.classList.toggle("hide");
-    playersRemainingGuesses.classList.toggle("hide");
-    playerInput.classList.toggle("hide");
-    label.classList.toggle("hide");
-    guessButton.classList.toggle("hide");
-    playerGuessedLetters.innerHTML = "";
-    remainingGuesses = 8;
-    guessedLetters.length = 0;
-    playersRemainingGuessesSpan.innerHTML = `${remainingGuesses} guess(es)`;
-    getWords();
-    hiddenPlayAgainButton.classList.toggle("hide");
-  })
 }
+
+hiddenPlayAgainButton.addEventListener("click", () => {
+  // location.reload();
+  playerMessage.classList.toggle("win");
+  playerMessage.innerHTML = "";
+  playerGuessedLetters.classList.toggle("hide");
+  playersRemainingGuesses.classList.toggle("hide");
+  playerInput.classList.toggle("hide");
+  label.classList.toggle("hide");
+  guessButton.classList.toggle("hide");
+  playerGuessedLetters.innerHTML = "";
+  remainingGuesses = 8;
+  guessedLetters.length = 0;
+  playersRemainingGuessesSpan.innerHTML = `${remainingGuesses} guess(es)`;
+  getWords();
+  hiddenPlayAgainButton.classList.toggle("hide");
+})
